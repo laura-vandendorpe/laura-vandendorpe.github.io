@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laura Vandendorpe Reference Style Mockup</title>
+  <style>
+    :root {
+      --bg: #f5efe7;
+      --bg-deep: #efe7db;
+      --paper: rgba(255, 252, 248, 0.72);
+      --ink: #171412;
+      --soft: rgba(23, 20, 18, 0.68);
+      --line: rgba(23, 20, 18, 0.12);
+      --rose: #e8c5cf;
+      --sage: #aab49b;
+      --gold: #c8af7d;
+      --shadow: 0 28px 70px rgba(46, 33, 25, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.55), transparent 26%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1320px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 18px 0 48px;
+    }
+
+    .intro {
+      margin-bottom: 20px;
+      padding: 14px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      background: rgba(255, 251, 246, 0.8);
+      box-shadow: 0 8px 20px rgba(46, 33, 25, 0.06);
+    }
+
+    .intro h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 0.95;
+    }
+
+    .intro p {
+      margin: 8px 0 0;
+      max-width: 68ch;
+      color: var(--soft);
+      line-height: 1.55;
+    }
+
+    .note {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.62);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .stage {
+      position: relative;
+      min-height: 900px;
+      border-radius: 34px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(255, 255, 255, 0.5), transparent 16%),
+        radial-gradient(circle at 80% 18%, rgba(232, 197, 207, 0.24), transparent 16%),
+        linear-gradient(180deg, #f8f2ea 0%, #f1e8dd 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .stage::before,
+    .stage::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .stage::before {
+      left: 6%;
+      bottom: 9%;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(170, 180, 155, 0.22), transparent 72%);
+    }
+
+    .stage::after {
+      right: 8%;
+      top: 12%;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(200, 175, 125, 0.18), transparent 70%);
+    }
+
+    .topline {
+      position: absolute;
+      top: 24px;
+      left: 26px;
+      right: 26px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 14px;
+      font-size: 0.76rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.56);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.58;
+    }
+
+    .poster {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      padding-top: 82px;
+      min-height: 900px;
+    }
+
+    .figure-wrap {
+      position: relative;
+      z-index: 1;
+      width: min(530px, 58vw);
+    }
+
+    .figure-halo {
+      position: absolute;
+      inset: -28px -34px 26px -34px;
+      border-radius: 48px;
+      background:
+        radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.7), transparent 26%),
+        linear-gradient(180deg, rgba(232, 197, 207, 0.34), rgba(170, 180, 155, 0.22));
+      filter: blur(2px);
+    }
+
+    .figure-frame {
+      position: relative;
+      padding: 16px;
+      border-radius: 42px;
+      background: rgba(255, 252, 248, 0.42);
+      border: 1px solid rgba(23, 20, 18, 0.08);
+      box-shadow: 0 20px 34px rgba(46, 33, 25, 0.08);
+      transform: rotate(-2deg);
+    }
+
+    .figure-frame img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 32px;
+    }
+
+    .caption {
+      position: absolute;
+      right: -34px;
+      bottom: 40px;
+      z-index: 3;
+      padding: 11px 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 252, 248, 0.88);
+      box-shadow: 0 12px 24px rgba(46, 33, 25, 0.08);
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    .name-block {
+      position: absolute;
+      left: 42px;
+      bottom: 38px;
+      z-index: 3;
+      max-width: 300px;
+    }
+
+    .name-block h2 {
+      margin: 0;
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      line-height: 0.9;
+      font-weight: 600;
+    }
+
+    .name-block p {
+      margin: 10px 0 0;
+      color: var(--soft);
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    .hotspot {
+      position: absolute;
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(23, 20, 18, 0.12);
+      background: rgba(255, 252, 248, 0.76);
+      box-shadow: 0 10px 22px rgba(46, 33, 25, 0.08);
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .hotspot:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .hotspot-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.62;
+    }
+
+    .hotspot.life {
+      top: 156px;
+      left: 92px;
+    }
+
+    .hotspot.constitution {
+      top: 170px;
+      right: 112px;
+    }
+
+    .hotspot.work {
+      top: 470px;
+      left: 128px;
+    }
+
+    .hotspot.library {
+      top: 518px;
+      right: 92px;
+    }
+
+    .hotspot.rituals {
+      bottom: 136px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .hotspot.rituals:hover {
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    .legend {
+      position: absolute;
+      right: 28px;
+      bottom: 28px;
+      z-index: 3;
+      font-size: 0.88rem;
+      color: var(--soft);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .summary-card {
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(23, 20, 18, 0.1);
+      background: rgba(255, 252, 248, 0.74);
+    }
+
+    .summary-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .summary-card p {
+      margin: 0;
+      color: var(--soft);
+      line-height: 1.58;
+    }
+
+    @media (max-width: 980px) {
+      .stage,
+      .poster {
+        min-height: auto;
+      }
+
+      .hotspot {
+        position: static;
+        margin-top: 12px;
+      }
+
+      .hotspot.rituals,
+      .hotspot.rituals:hover {
+        transform: none;
+      }
+
+      .poster {
+        padding: 82px 22px 220px;
+      }
+
+      .name-block,
+      .legend,
+      .caption {
+        position: static;
+        margin-top: 18px;
+      }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100% - 14px, 1320px);
+      }
+
+      .stage {
+        border-radius: 26px;
+      }
+
+      .topline {
+        left: 18px;
+        right: 18px;
+      }
+
+      .poster {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .figure-wrap {
+        width: min(100%, 420px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="intro">
+      <h1>Reference-style mockup</h1>
+      <p>
+        This version follows the reference much more closely in spirit: one central figure,
+        sparse type, floating hotspots, and a homepage that feels like a poster rather than a layout.
+      </p>
+      <span class="note">Original design in the language of the reference</span>
+    </section>
+
+    <section class="stage">
+      <div class="topline">
+        <span>Laura Vandendorpe</span>
+        <span class="badge"><span class="badge-dot"></span>personal site / draft one</span>
+      </div>
+
+      <div class="poster">
+        <a class="hotspot life" href="#life">
+          <span class="hotspot-dot"></span>
+          <span>Life Story</span>
+        </a>
+        <a class="hotspot constitution" href="#constitution">
+          <span class="hotspot-dot"></span>
+          <span>Constitution</span>
+        </a>
+        <a class="hotspot work" href="#work">
+          <span class="hotspot-dot"></span>
+          <span>Work</span>
+        </a>
+        <a class="hotspot library" href="#library">
+          <span class="hotspot-dot"></span>
+          <span>Library</span>
+        </a>
+        <a class="hotspot rituals" href="#rituals">
+          <span class="hotspot-dot"></span>
+          <span>Rituals</span>
+        </a>
+
+        <div class="figure-wrap">
+          <div class="figure-halo"></div>
+          <div class="figure-frame">
+            <img src="laura.jpeg" alt="Laura Vandendorpe" />
+          </div>
+          <div class="caption">enter through any corner</div>
+        </div>
+
+        <div class="name-block">
+          <h2>Laura Vandendorpe</h2>
+          <p>
+            taste, memory, ambition, principles,
+            and the books that rearranged the room
+          </p>
+        </div>
+
+        <div class="legend">Fortuna audaces iuvat / XOXO</div>
+      </div>
+    </section>
+
+    <section class="summary">
+      <div class="summary-card">
+        <strong>What changed</strong>
+        <p>
+          The composition is much more restrained now: fewer elements, more empty space, and one dominant image.
+        </p>
+      </div>
+      <div class="summary-card">
+        <strong>What stays flexible</strong>
+        <p>
+          We can rename or reduce the hotspots, change the photo treatment, and tighten the bottom-left text.
+        </p>
+      </div>
+      <div class="summary-card">
+        <strong>Best next step</strong>
+        <p>
+          If this is finally in the right family, I’ll turn it into the real homepage and refine the typography and placement.
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

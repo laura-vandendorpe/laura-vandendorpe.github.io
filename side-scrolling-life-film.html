@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laura Vandendorpe: Side-Scrolling Life Film</title>
+  <style>
+    :root {
+      --night: #10131f;
+      --ink: #171c2c;
+      --cream: #f7efe3;
+      --mist: #d8e4f0;
+      --rose: #f1cad4;
+      --gold: #d6b678;
+      --moss: #72846c;
+      --pearl: rgba(255, 252, 247, 0.78);
+      --glass: rgba(255, 252, 247, 0.14);
+      --line: rgba(255, 252, 247, 0.18);
+      --shadow: 0 30px 80px rgba(8, 12, 22, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 24%),
+        linear-gradient(180deg, #12182a 0%, #1d2740 36%, #2f3753 68%, #584e5a 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.14), transparent 0 2px, transparent 3px),
+        radial-gradient(circle at 72% 12%, rgba(255, 255, 255, 0.12), transparent 0 2px, transparent 3px),
+        radial-gradient(circle at 82% 32%, rgba(255, 255, 255, 0.1), transparent 0 2px, transparent 3px),
+        radial-gradient(circle at 34% 24%, rgba(255, 255, 255, 0.12), transparent 0 2px, transparent 3px),
+        radial-gradient(circle at 48% 8%, rgba(255, 255, 255, 0.08), transparent 0 1px, transparent 2px);
+      opacity: 0.7;
+    }
+
+    .film-shell {
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(15, 19, 31, 0.4);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 30px rgba(8, 12, 22, 0.18);
+    }
+
+    .progress-copy {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .progress-mark {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 16px rgba(214, 182, 120, 0.6);
+      flex: 0 0 auto;
+    }
+
+    .progress-label {
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: rgba(247, 239, 227, 0.78);
+    }
+
+    .progress-title {
+      min-width: 0;
+      font-size: 0.98rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .progress-bar {
+      width: min(34vw, 320px);
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 252, 247, 0.14);
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--rose), var(--gold));
+      transition: width 160ms ease;
+    }
+
+    .film-wrap {
+      position: relative;
+      height: 700vh;
+    }
+
+    .film-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .film-strip {
+      display: flex;
+      height: 100%;
+      width: 600vw;
+      will-change: transform;
+    }
+
+    .scene {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      padding: 90px 28px 28px;
+    }
+
+    .scene::before,
+    .scene::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .scene::before {
+      width: 320px;
+      height: 320px;
+      top: 10%;
+      right: 10%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 72%);
+      filter: blur(6px);
+    }
+
+    .scene::after {
+      width: 420px;
+      height: 420px;
+      left: -120px;
+      bottom: -100px;
+      background: radial-gradient(circle, rgba(241, 202, 212, 0.16), transparent 72%);
+      filter: blur(12px);
+    }
+
+    .scene[data-theme="dawn"] {
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.1), transparent 22%),
+        linear-gradient(180deg, #1b2138 0%, #33415d 48%, #7c6d75 100%);
+    }
+
+    .scene[data-theme="spring"] {
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.1), transparent 22%),
+        linear-gradient(180deg, #24334c 0%, #49657e 44%, #93a49a 100%);
+    }
+
+    .scene[data-theme="gold"] {
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, #2b3145 0%, #66536a 46%, #b48d68 100%);
+    }
+
+    .scene[data-theme="city"] {
+      background:
+        radial-gradient(circle at 20% 14%, rgba(255, 255, 255, 0.08), transparent 18%),
+        linear-gradient(180deg, #181f33 0%, #28304b 42%, #514c62 100%);
+    }
+
+    .scene[data-theme="rose"] {
+      background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, #261f35 0%, #574663 50%, #a1747a 100%);
+    }
+
+    .scene[data-theme="future"] {
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.1), transparent 22%),
+        linear-gradient(180deg, #182032 0%, #2d3d55 42%, #546770 100%);
+    }
+
+    .scene-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 34px;
+      border: 1px solid rgba(255, 252, 247, 0.12);
+      background: linear-gradient(180deg, rgba(255, 252, 247, 0.04), rgba(255, 252, 247, 0.02));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+      gap: 18px;
+      padding: 28px;
+      backdrop-filter: blur(4px);
+    }
+
+    .scene-copy {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      max-width: 58ch;
+      padding-right: 12px;
+    }
+
+    .scene-index {
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(247, 239, 227, 0.76);
+    }
+
+    .scene h1,
+    .scene h2 {
+      margin: 12px 0 0;
+      font-weight: 600;
+      line-height: 0.92;
+      font-size: clamp(3rem, 7vw, 6rem);
+    }
+
+    .scene p {
+      margin: 16px 0 0;
+      font-size: 1.08rem;
+      line-height: 1.72;
+      color: rgba(247, 239, 227, 0.9);
+    }
+
+    .scene-note {
+      display: inline-flex;
+      margin-top: 22px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 252, 247, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 252, 247, 0.08);
+      font-size: 0.86rem;
+      color: rgba(247, 239, 227, 0.86);
+      width: fit-content;
+    }
+
+    .scene-visual {
+      position: relative;
+      min-height: 0;
+    }
+
+    .floating-card {
+      position: absolute;
+      padding: 14px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 252, 247, 0.14);
+      background: rgba(255, 252, 247, 0.1);
+      backdrop-filter: blur(12px);
+      color: rgba(247, 239, 227, 0.88);
+      font-size: 0.96rem;
+      line-height: 1.45;
+      max-width: 220px;
+      box-shadow: 0 14px 28px rgba(8, 12, 22, 0.18);
+    }
+
+    .floating-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(247, 239, 227, 0.68);
+    }
+
+    .image-frame {
+      position: absolute;
+      right: 24px;
+      bottom: 26px;
+      width: min(400px, 88%);
+      padding: 14px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 252, 247, 0.16);
+      background: rgba(255, 252, 247, 0.1);
+      box-shadow: 0 18px 36px rgba(8, 12, 22, 0.22);
+      backdrop-filter: blur(12px);
+      transform: rotate(4deg);
+    }
+
+    .image-frame img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .image-caption {
+      margin-top: 10px;
+      font-size: 0.92rem;
+      color: rgba(247, 239, 227, 0.78);
+    }
+
+    .line-drawing {
+      position: absolute;
+      inset: 14% 6% 12% 10%;
+      opacity: 0.5;
+    }
+
+    .line-drawing svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .bottom-prompt {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 20;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 252, 247, 0.14);
+      background: rgba(15, 19, 31, 0.34);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(247, 239, 227, 0.76);
+      backdrop-filter: blur(12px);
+    }
+
+    .scene-1 .floating-card.one {
+      left: 8%;
+      top: 16%;
+    }
+
+    .scene-1 .floating-card.two {
+      right: 4%;
+      top: 18%;
+    }
+
+    .scene-2 .floating-card.one {
+      left: 6%;
+      top: 14%;
+    }
+
+    .scene-2 .floating-card.two {
+      right: 10%;
+      top: 34%;
+    }
+
+    .scene-3 .floating-card.one {
+      left: 10%;
+      top: 18%;
+    }
+
+    .scene-3 .floating-card.two {
+      right: 8%;
+      top: 16%;
+    }
+
+    .scene-4 .floating-card.one {
+      left: 8%;
+      top: 16%;
+    }
+
+    .scene-4 .floating-card.two {
+      right: 5%;
+      bottom: 18%;
+    }
+
+    .scene-5 .floating-card.one {
+      left: 6%;
+      top: 18%;
+    }
+
+    .scene-5 .floating-card.two {
+      right: 8%;
+      top: 16%;
+    }
+
+    .scene-6 .floating-card.one {
+      left: 10%;
+      top: 18%;
+    }
+
+    .scene-6 .floating-card.two {
+      right: 9%;
+      top: 26%;
+    }
+
+    .credits {
+      padding: 28px 24px 40px;
+      color: rgba(247, 239, 227, 0.74);
+      text-align: center;
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 960px) {
+      .progress {
+        left: 12px;
+        right: 12px;
+        top: 12px;
+      }
+
+      .progress-bar {
+        width: 120px;
+      }
+
+      .scene {
+        padding: 82px 14px 14px;
+      }
+
+      .scene-inner {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .scene-copy {
+        justify-content: end;
+        max-width: none;
+      }
+
+      .scene-visual {
+        min-height: 320px;
+      }
+
+      .image-frame {
+        width: min(300px, 78%);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .progress-copy {
+        gap: 10px;
+      }
+
+      .progress-title {
+        display: none;
+      }
+
+      .scene h1,
+      .scene h2 {
+        font-size: clamp(2.3rem, 10vw, 4.1rem);
+      }
+
+      .scene p {
+        font-size: 0.98rem;
+      }
+
+      .floating-card {
+        max-width: 160px;
+        padding: 12px;
+        font-size: 0.84rem;
+      }
+
+      .scene-visual {
+        min-height: 260px;
+      }
+
+      .image-frame {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: 100%;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="film-shell">
+    <div class="progress">
+      <div class="progress-copy">
+        <span class="progress-mark"></span>
+        <span class="progress-label">Life film</span>
+        <span class="progress-title" id="sceneTitle">Opening frame</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div class="film-wrap" id="filmWrap">
+      <div class="film-sticky">
+        <div class="film-strip" id="filmStrip">
+          <section class="scene scene-1" data-title="Opening frame" data-theme="dawn">
+            <div class="scene-inner">
+              <div class="scene-copy">
+                <span class="scene-index">Chapter 01</span>
+                <h1>Before the plot even starts.</h1>
+                <p>
+                  This version imagines your website like the opening shot of a film:
+                  not facts first, but atmosphere. A life arriving on screen with taste,
+                  promise, family mythology, and the feeling that it is all about to become
+                  something bigger.
+                </p>
+                <span class="scene-note">The visitor is carried through, not just told.</span>
+              </div>
+              <div class="scene-visual">
+                <div class="line-drawing">
+                  <svg viewBox="0 0 100 100" fill="none">
+                    <path d="M4 82C22 60 26 52 35 42C45 31 63 18 95 8" stroke="rgba(255,252,247,0.35)" stroke-width="0.6" stroke-linecap="round" />
+                    <path d="M20 90C29 73 37 61 54 47C66 37 78 31 92 28" stroke="rgba(255,252,247,0.22)" stroke-width="0.4" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <div class="floating-card one">
+                  <strong>Opening image</strong>
+                  An introduction built around a cinematic first impression rather than a bio paragraph.
+                </div>
+                <div class="floating-card two">
+                  <strong>Voiceover</strong>
+                  Just enough text to suggest the emotional register of the whole story.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene scene-2" data-title="Origins" data-theme="spring">
+            <div class="scene-inner">
+              <div class="scene-copy">
+                <span class="scene-index">Chapter 02</span>
+                <h2>Origins and first enchantments.</h2>
+                <p>
+                  Here the film gets more specific. Childhood, early tastes, first symbols,
+                  the emotional climate you were formed in. It can feel soft and luminous rather
+                  than literal, with little details drifting into view as the visitor moves.
+                </p>
+                <span class="scene-note">Think memories, not milestones.</span>
+              </div>
+              <div class="scene-visual">
+                <div class="floating-card one">
+                  <strong>Scene pieces</strong>
+                  Family stories, early ambition, aesthetic formation, first private myths.
+                </div>
+                <div class="floating-card two">
+                  <strong>Motion idea</strong>
+                  Text and props ease in slowly, like memories surfacing through fog.
+                </div>
+                <div class="line-drawing">
+                  <svg viewBox="0 0 100 100" fill="none">
+                    <circle cx="23" cy="44" r="10" stroke="rgba(255,252,247,0.28)" stroke-width="0.5" />
+                    <circle cx="54" cy="32" r="14" stroke="rgba(255,252,247,0.18)" stroke-width="0.5" />
+                    <circle cx="74" cy="60" r="22" stroke="rgba(255,252,247,0.18)" stroke-width="0.4" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene scene-3" data-title="Becoming" data-theme="gold">
+            <div class="scene-inner">
+              <div class="scene-copy">
+                <span class="scene-index">Chapter 03</span>
+                <h2>Becoming visible to yourself.</h2>
+                <p>
+                  This is where the plot develops momentum. You start to become the person who
+                  wants more: more beauty, more scale, more meaning, more authorship over the shape
+                  of your life. The scene can feel warmer, sharper, more charged.
+                </p>
+                <span class="scene-note">A chapter for first real velocity.</span>
+              </div>
+              <div class="scene-visual">
+                <div class="floating-card one">
+                  <strong>Possible beats</strong>
+                  Education, independence, confidence, risk, reinvention, first major choices.
+                </div>
+                <div class="floating-card two">
+                  <strong>Visual cue</strong>
+                  The palette brightens here so the film feels like it is gathering force.
+                </div>
+                <div class="line-drawing">
+                  <svg viewBox="0 0 100 100" fill="none">
+                    <path d="M10 76C26 56 34 50 48 37C60 26 75 18 88 14" stroke="rgba(255,252,247,0.3)" stroke-width="0.6" stroke-linecap="round" />
+                    <path d="M12 84H90" stroke="rgba(255,252,247,0.18)" stroke-width="0.4" stroke-dasharray="2 4" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene scene-4" data-title="The portrait scene" data-theme="city">
+            <div class="scene-inner">
+              <div class="scene-copy">
+                <span class="scene-index">Chapter 04</span>
+                <h2>The portrait scene.</h2>
+                <p>
+                  Midway through the film, the visitor reaches a frame that feels like the
+                  “present self” shot. This is where your image can carry the story for a moment,
+                  with supporting fragments around it: work, cities, style, love, private rules.
+                </p>
+                <span class="scene-note">A visual anchor in the middle of the narrative.</span>
+              </div>
+              <div class="scene-visual">
+                <div class="floating-card one">
+                  <strong>Why it matters</strong>
+                  The site needs one moment where the person at the center fully appears.
+                </div>
+                <div class="floating-card two">
+                  <strong>Expandable later</strong>
+                  Hotspots here could open sidequests: books, rituals, work, love, family.
+                </div>
+                <div class="image-frame">
+                  <img src="laura.jpeg" alt="Laura Vandendorpe" />
+                  <div class="image-caption">A central frame for the present-tense self.</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene scene-5" data-title="What endures" data-theme="rose">
+            <div class="scene-inner">
+              <div class="scene-copy">
+                <span class="scene-index">Chapter 05</span>
+                <h2>What endures through every era.</h2>
+                <p>
+                  Not everything belongs to one chapter. This section is for the deeper through-lines:
+                  the things you keep valuing no matter the city, season, or version of yourself.
+                  Books. Love. Standards. Ambition. Taste. Symbols. Repeated desires.
+                </p>
+                <span class="scene-note">This is where the mythology starts to cohere.</span>
+              </div>
+              <div class="scene-visual">
+                <div class="floating-card one">
+                  <strong>Good side paths</strong>
+                  Library, constitution, work, beauty rituals, people who changed the story.
+                </div>
+                <div class="floating-card two">
+                  <strong>Design note</strong>
+                  In a fuller build, these could peel open as mini-scenes without breaking the film.
+                </div>
+                <div class="line-drawing">
+                  <svg viewBox="0 0 100 100" fill="none">
+                    <path d="M12 58C26 38 40 34 51 42C65 52 76 51 90 34" stroke="rgba(255,252,247,0.32)" stroke-width="0.6" stroke-linecap="round" />
+                    <path d="M20 74C33 61 49 58 60 65C72 72 82 70 92 59" stroke="rgba(255,252,247,0.18)" stroke-width="0.4" stroke-linecap="round" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene scene-6" data-title="The next frame" data-theme="future">
+            <div class="scene-inner">
+              <div class="scene-copy">
+                <span class="scene-index">Chapter 06</span>
+                <h2>The frame after this one.</h2>
+                <p>
+                  A strong life-film site should end facing forward. The last scene can become the
+                  space for future family, future work, future rooms, future selves. The visitor leaves
+                  feeling the story is still moving and the camera is simply cutting at the right moment.
+                </p>
+                <span class="scene-note">End on propulsion, not summary.</span>
+              </div>
+              <div class="scene-visual">
+                <div class="floating-card one">
+                  <strong>Ending image</strong>
+                  A horizon scene, a final line, or a doorway into the next chapter.
+                </div>
+                <div class="floating-card two">
+                  <strong>For the real build</strong>
+                  We can make this scene lead into contact, a letter, or a very intimate final note.
+                </div>
+                <div class="line-drawing">
+                  <svg viewBox="0 0 100 100" fill="none">
+                    <path d="M8 78C33 69 42 59 55 43C67 29 76 16 94 8" stroke="rgba(255,252,247,0.36)" stroke-width="0.6" stroke-linecap="round" />
+                    <circle cx="74" cy="25" r="10" stroke="rgba(255,252,247,0.18)" stroke-width="0.4" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="bottom-prompt">Scroll to move through the film</div>
+    </div>
+
+    <div class="credits">
+      This is a mock version of the side-scrolling life film concept: structure first, content second.
+      If the movement feels right, the next step is making each chapter specifically yours.
+    </div>
+  </div>
+
+  <script>
+    const wrap = document.getElementById("filmWrap");
+    const strip = document.getElementById("filmStrip");
+    const scenes = Array.from(strip.querySelectorAll(".scene"));
+    const fill = document.getElementById("progressFill");
+    const title = document.getElementById("sceneTitle");
+
+    function updateFilm() {
+      const maxScroll = wrap.offsetHeight - window.innerHeight;
+      const start = wrap.offsetTop;
+      const raw = window.scrollY - start;
+      const clamped = Math.max(0, Math.min(raw, maxScroll));
+      const progress = maxScroll > 0 ? clamped / maxScroll : 0;
+      const maxTranslate = strip.scrollWidth - window.innerWidth;
+
+      strip.style.transform = "translateX(" + (-progress * maxTranslate) + "px)";
+      fill.style.width = (progress * 100).toFixed(2) + "%";
+
+      const sceneIndex = Math.min(
+        scenes.length - 1,
+        Math.floor(progress * scenes.length)
+      );
+
+      title.textContent = scenes[sceneIndex].dataset.title;
+    }
+
+    updateFilm();
+    window.addEventListener("scroll", updateFilm, { passive: true });
+    window.addEventListener("resize", updateFilm);
+  </script>
+</body>
+</html>

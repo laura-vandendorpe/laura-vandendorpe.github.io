@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laura Vandendorpe Mockups</title>
+  <style>
+    :root {
+      --ink: #171717;
+      --paper: #f7f2e8;
+      --cream: #fdf9f3;
+      --moss: #6f8a68;
+      --forest: #223529;
+      --fern: #96ad8d;
+      --blush: #efcfd4;
+      --plum: #5d4b55;
+      --stone: #d8d0c5;
+      --gold: #c2a76f;
+      --line: rgba(23, 23, 23, 0.12);
+      --shadow: 0 24px 80px rgba(18, 25, 18, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.55), transparent 26%),
+        linear-gradient(180deg, #f1eadf 0%, #e7ddd1 100%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0 80px;
+    }
+
+    .intro {
+      position: sticky;
+      top: 14px;
+      z-index: 5;
+      margin-bottom: 24px;
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 22px;
+      background: rgba(252, 248, 241, 0.82);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 28px rgba(32, 32, 32, 0.08);
+    }
+
+    .intro-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .intro h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 0.95;
+      font-weight: 600;
+    }
+
+    .intro p {
+      margin: 8px 0 0;
+      max-width: 60ch;
+      line-height: 1.6;
+    }
+
+    .top-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .top-links a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.65);
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .top-links a:hover,
+    .chapter-chip:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .mockup {
+      margin-top: 28px;
+      border-radius: 34px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .mockup-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border-bottom: 1px solid rgba(23, 23, 23, 0.08);
+    }
+
+    .mockup-header h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .mockup-header p {
+      margin: 0;
+      line-height: 1.5;
+      color: rgba(23, 23, 23, 0.72);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(23, 23, 23, 0.08);
+    }
+
+    .canvas {
+      position: relative;
+      min-height: 780px;
+      padding: 32px;
+    }
+
+    .chapter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid rgba(23, 23, 23, 0.1);
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.7;
+    }
+
+    .chapter-title {
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      font-weight: 600;
+    }
+
+    .chapter-copy {
+      margin: 16px 0 0;
+      max-width: 54ch;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .small-note {
+      margin: 0;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .card-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(23, 23, 23, 0.1);
+      background: rgba(255, 255, 255, 0.56);
+      backdrop-filter: blur(8px);
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+    }
+
+    .card p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .editorial {
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.65), transparent 22%),
+        linear-gradient(180deg, #f6efe4 0%, #efe5d8 100%);
+    }
+
+    .editorial .canvas {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 360px);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .editorial-hero {
+      padding: 14px 0 0;
+    }
+
+    .editorial-hero .chapter-title {
+      color: #20221c;
+      max-width: 7ch;
+    }
+
+    .editorial-hero .small-note {
+      color: var(--moss);
+    }
+
+    .editorial-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .editorial-links .chapter-chip {
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .editorial-aside {
+      display: grid;
+      gap: 16px;
+    }
+
+    .editorial-path {
+      position: relative;
+      margin-top: 34px;
+      padding-left: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .editorial-path::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      bottom: 6px;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(111, 138, 104, 0.3), rgba(111, 138, 104, 0.95));
+    }
+
+    .path-stop {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .path-stop::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #f7f2e8;
+      border: 1px solid rgba(111, 138, 104, 0.5);
+      box-shadow: 0 0 0 6px rgba(111, 138, 104, 0.08);
+    }
+
+    .path-stop h3 {
+      margin: 0;
+      font-size: 1.28rem;
+      font-weight: 600;
+    }
+
+    .path-stop p {
+      margin: 8px 0 0;
+      max-width: 42ch;
+      line-height: 1.6;
+    }
+
+    .enchant {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 245, 231, 0.12), transparent 18%),
+        radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.08), transparent 14%),
+        linear-gradient(180deg, #1e2f26 0%, #31483a 36%, #4f6654 100%);
+      color: #f7f1e6;
+    }
+
+    .enchant .mockup-header {
+      background: rgba(9, 15, 12, 0.24);
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .enchant .mockup-header p,
+    .enchant .small-note {
+      color: rgba(247, 241, 230, 0.76);
+    }
+
+    .enchant .eyebrow,
+    .enchant .chapter-chip,
+    .enchant .card {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 249, 239, 0.08);
+    }
+
+    .enchant .chapter-title {
+      color: #fff9ef;
+    }
+
+    .enchant .canvas {
+      overflow: hidden;
+    }
+
+    .enchant .canvas::before,
+    .enchant .canvas::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .enchant .canvas::before {
+      top: 70px;
+      right: 100px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255, 243, 209, 0.38), transparent 68%);
+    }
+
+    .enchant .canvas::after {
+      left: 40px;
+      bottom: 80px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(177, 213, 172, 0.2), transparent 72%);
+    }
+
+    .enchant-layout {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 30px;
+      align-items: center;
+      min-height: 700px;
+    }
+
+    .enchant-copy {
+      padding: 26px 10px 26px 6px;
+    }
+
+    .enchant-map {
+      position: relative;
+      min-height: 560px;
+    }
+
+    .moon-path {
+      position: absolute;
+      left: 50%;
+      top: 40px;
+      bottom: 40px;
+      width: 2px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, rgba(255, 249, 239, 0.18), rgba(255, 249, 239, 0.7));
+    }
+
+    .moon-node {
+      position: absolute;
+      width: 220px;
+      padding: 16px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 249, 239, 0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .moon-node h3 {
+      margin: 0 0 6px;
+      font-size: 1.18rem;
+    }
+
+    .moon-node p {
+      margin: 0;
+      line-height: 1.55;
+      color: rgba(247, 241, 230, 0.82);
+    }
+
+    .moon-node::before {
+      content: "";
+      position: absolute;
+      top: 28px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff5d7;
+      box-shadow: 0 0 18px rgba(255, 245, 215, 0.65);
+    }
+
+    .moon-node.left::before {
+      right: -32px;
+    }
+
+    .moon-node.right::before {
+      left: -32px;
+    }
+
+    .moon-node.one {
+      left: 20px;
+      top: 30px;
+    }
+
+    .moon-node.two {
+      right: 18px;
+      top: 165px;
+    }
+
+    .moon-node.three {
+      left: 30px;
+      top: 305px;
+    }
+
+    .moon-node.four {
+      right: 36px;
+      top: 445px;
+    }
+
+    .rooms {
+      background:
+        linear-gradient(180deg, #f5f0e8 0%, #ece4d8 100%);
+    }
+
+    .rooms .canvas {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 26px;
+      align-items: start;
+    }
+
+    .rooms-hero {
+      padding-top: 8px;
+    }
+
+    .rooms-hero .chapter-title {
+      max-width: 7ch;
+      color: #23211e;
+    }
+
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .room {
+      position: relative;
+      min-height: 245px;
+      padding: 22px;
+      border-radius: 28px;
+      border: 1px solid rgba(23, 23, 23, 0.08);
+      background: rgba(255, 255, 255, 0.52);
+      box-shadow: 0 14px 30px rgba(44, 36, 28, 0.08);
+      overflow: hidden;
+    }
+
+    .room::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -40px auto;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      opacity: 0.55;
+    }
+
+    .room.life::after {
+      background: radial-gradient(circle, rgba(194, 167, 111, 0.34), transparent 68%);
+    }
+
+    .room.constitution::after {
+      background: radial-gradient(circle, rgba(111, 138, 104, 0.26), transparent 68%);
+    }
+
+    .room.work::after {
+      background: radial-gradient(circle, rgba(93, 75, 85, 0.18), transparent 68%);
+    }
+
+    .room.library::after {
+      background: radial-gradient(circle, rgba(239, 207, 212, 0.34), transparent 68%);
+    }
+
+    .room h3 {
+      margin: 40px 0 10px;
+      font-size: 1.52rem;
+    }
+
+    .room p {
+      margin: 0;
+      line-height: 1.62;
+      max-width: 26ch;
+    }
+
+    .room-number {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid rgba(23, 23, 23, 0.12);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+    }
+
+    .room-link {
+      display: inline-block;
+      margin-top: 16px;
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .summary .card {
+      min-height: 100%;
+    }
+
+    @media (max-width: 980px) {
+      .editorial .canvas,
+      .enchant-layout,
+      .rooms .canvas,
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .enchant-map {
+        min-height: 700px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 18px, 1200px);
+      }
+
+      .canvas {
+        min-height: auto;
+        padding: 22px;
+      }
+
+      .rooms-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .moon-node {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        width: 100%;
+        margin-top: 14px;
+      }
+
+      .moon-path {
+        display: none;
+      }
+
+      .enchant-map {
+        min-height: auto;
+      }
+
+      .moon-node.left::before,
+      .moon-node.right::before {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="intro">
+      <div class="intro-top">
+        <div>
+          <h1>Three homepage directions</h1>
+          <p>
+            These are concept mockups for a site built from different chapters or corners of you,
+            not one strict life timeline. Each one has the same core sections: Life Story,
+            Constitution, Work, and Library.
+          </p>
+        </div>
+        <span class="eyebrow">Compare the vibes</span>
+      </div>
+      <div class="top-links">
+        <a href="#editorial">Editorial</a>
+        <a href="#enchant">Enchanted Minimal</a>
+        <a href="#rooms">Index of Rooms</a>
+      </div>
+    </section>
+
+    <section class="mockup editorial" id="editorial">
+      <div class="mockup-header">
+        <div>
+          <h2>Mockup 1: Editorial</h2>
+          <p>Cleanest and chicest. The whimsy is in the language and pacing, not decoration.</p>
+        </div>
+        <span class="eyebrow">Most minimal</span>
+      </div>
+      <div class="canvas">
+        <div class="editorial-hero">
+          <p class="small-note">Laura Vandendorpe</p>
+          <h2 class="chapter-title">A small private index.</h2>
+          <p class="chapter-copy">
+            Not a chronology, exactly. More like a set of cleanly arranged entries:
+            the story, the constitution, the work, the books, the self in chapters.
+          </p>
+          <div class="editorial-links">
+            <a class="chapter-chip" href="#editorial"><span class="chip-dot"></span>Life Story</a>
+            <a class="chapter-chip" href="#editorial"><span class="chip-dot"></span>Constitution</a>
+            <a class="chapter-chip" href="#editorial"><span class="chip-dot"></span>Work</a>
+            <a class="chapter-chip" href="#editorial"><span class="chip-dot"></span>Library</a>
+          </div>
+
+          <div class="editorial-path">
+            <div class="path-stop">
+              <h3>Life Story</h3>
+              <p>Eras, turning points, sidequests, and the mood of each chapter.</p>
+            </div>
+            <div class="path-stop">
+              <h3>Constitution</h3>
+              <p>Rules, contradictions, standards, beliefs, tastes, and private doctrine.</p>
+            </div>
+            <div class="path-stop">
+              <h3>Work</h3>
+              <p>Ambition, projects, what you build, how you think, and what you want next.</p>
+            </div>
+            <div class="path-stop">
+              <h3>Library</h3>
+              <p>Books read, books loved, books returned to when you want your bearings back.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="editorial-aside">
+          <div class="card">
+            <strong>Why it works</strong>
+            <p>It feels expensive, self-possessed, and literary without trying too hard.</p>
+          </div>
+          <div class="card">
+            <strong>Best for</strong>
+            <p>If you want people to feel like they’ve entered a very curated personal archive.</p>
+          </div>
+          <div class="card">
+            <strong>Risk</strong>
+            <p>It may be a little too restrained if you want the homepage to feel overtly magical.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="mockup enchant" id="enchant">
+      <div class="mockup-header">
+        <div>
+          <h2>Mockup 2: Enchanted Minimal</h2>
+          <p>Dreamier and more atmospheric. Still clean, but with a moonlit map feeling.</p>
+        </div>
+        <span class="eyebrow">Most whimsical</span>
+      </div>
+      <div class="canvas">
+        <div class="enchant-layout">
+          <div class="enchant-copy">
+            <p class="small-note">Laura Vandendorpe</p>
+            <h2 class="chapter-title">Enter through any clearing.</h2>
+            <p class="chapter-copy">
+              The homepage becomes a night map of little illuminated corners. You don’t
+              “read” the site in order so much as drift toward the chapter that glows for you.
+            </p>
+            <div class="editorial-links">
+              <a class="chapter-chip" href="#enchant"><span class="chip-dot"></span>Life Story</a>
+              <a class="chapter-chip" href="#enchant"><span class="chip-dot"></span>Constitution</a>
+              <a class="chapter-chip" href="#enchant"><span class="chip-dot"></span>Work</a>
+              <a class="chapter-chip" href="#enchant"><span class="chip-dot"></span>Library</a>
+            </div>
+          </div>
+
+          <div class="enchant-map">
+            <div class="moon-path"></div>
+            <div class="moon-node left one">
+              <h3>Life Story</h3>
+              <p>Chapters, eras, and the sidequests that made them unforgettable.</p>
+            </div>
+            <div class="moon-node right two">
+              <h3>Constitution</h3>
+              <p>What I believe, what I refuse, what I want more of.</p>
+            </div>
+            <div class="moon-node left three">
+              <h3>Work</h3>
+              <p>Things I make, futures I’m building toward, ambitions with structure.</p>
+            </div>
+            <div class="moon-node right four">
+              <h3>Library</h3>
+              <p>Books that altered my weather, sharpened my taste, or stayed with me.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mockup rooms" id="rooms">
+      <div class="mockup-header">
+        <div>
+          <h2>Mockup 3: Index of Rooms</h2>
+          <p>Conceptual, architectural, and a little playful. More “house of self” than forest.</p>
+        </div>
+        <span class="eyebrow">Most original structure</span>
+      </div>
+      <div class="canvas">
+        <div class="rooms-hero">
+          <p class="small-note">Laura Vandendorpe</p>
+          <h2 class="chapter-title">A house made of chapters.</h2>
+          <p class="chapter-copy">
+            Each room is a different mode of knowing me. The homepage is the floor plan:
+            not everything at once, just four doors worth opening.
+          </p>
+        </div>
+
+        <div class="rooms-grid">
+          <article class="room life">
+            <span class="room-number">01</span>
+            <h3>Life Story</h3>
+            <p>Personal history, memorable seasons, and the scenes I still revisit.</p>
+            <a class="room-link" href="#rooms">Enter room</a>
+          </article>
+          <article class="room constitution">
+            <span class="room-number">02</span>
+            <h3>Constitution</h3>
+            <p>Principles, preferences, contradictions, standards, vows, non-negotiables.</p>
+            <a class="room-link" href="#rooms">Enter room</a>
+          </article>
+          <article class="room work">
+            <span class="room-number">03</span>
+            <h3>Work</h3>
+            <p>What I do, how I think, what I’m trying to make, and where I’m headed.</p>
+            <a class="room-link" href="#rooms">Enter room</a>
+          </article>
+          <article class="room library">
+            <span class="room-number">04</span>
+            <h3>Library</h3>
+            <p>Books I’ve read, loved, annotated, remembered, and quietly lived inside.</p>
+            <a class="room-link" href="#rooms">Enter room</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary">
+      <div class="card">
+        <strong>My recommendation</strong>
+        <p>
+          Enchanted Minimal is probably the best fit if you want whimsical and cool at the same time.
+          Editorial is strongest if you want something more timeless and chic.
+        </p>
+      </div>
+      <div class="card">
+        <strong>What we’d do next</strong>
+        <p>
+          Pick one direction, then I’ll turn it into your real homepage and make the four chapter
+          entries feel specifically yours.
+        </p>
+      </div>
+      <div class="card">
+        <strong>Possible extra chapters</strong>
+        <p>
+          Love, beauty, family mythology, cities, rituals, dreams, people who changed me,
+          and a reading notebook are all natural later additions.
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

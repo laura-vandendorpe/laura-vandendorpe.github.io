@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laura Vandendorpe Poster Mockups</title>
+  <style>
+    :root {
+      --bg: #f5eee7;
+      --paper: rgba(255, 251, 246, 0.72);
+      --ink: #1e1a18;
+      --soft-ink: rgba(30, 26, 24, 0.68);
+      --blush: #efc7d0;
+      --rose: #e5b4c1;
+      --gold: #c9a96c;
+      --sage: #a7b398;
+      --moss: #71816a;
+      --line: rgba(30, 26, 24, 0.12);
+      --shadow: 0 24px 70px rgba(52, 38, 30, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.55), transparent 28%),
+        linear-gradient(180deg, #f8f2eb 0%, #eee4d8 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1240px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 22px 0 72px;
+    }
+
+    .intro {
+      margin-bottom: 24px;
+      padding: 16px 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background: rgba(255, 250, 244, 0.78);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 24px rgba(31, 26, 24, 0.06);
+    }
+
+    .intro h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.7rem);
+      line-height: 0.95;
+    }
+
+    .intro p {
+      margin: 10px 0 0;
+      max-width: 66ch;
+      line-height: 1.6;
+      color: var(--soft-ink);
+    }
+
+    .note {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.6);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mockup {
+      margin-top: 30px;
+      border-radius: 36px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.56);
+      box-shadow: var(--shadow);
+    }
+
+    .mockup-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 22px;
+      border-bottom: 1px solid rgba(30, 26, 24, 0.08);
+      background: rgba(255, 255, 255, 0.34);
+    }
+
+    .mockup-header h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .mockup-header p {
+      margin: 4px 0 0;
+      line-height: 1.5;
+      color: var(--soft-ink);
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.56);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .canvas {
+      position: relative;
+      min-height: 860px;
+      padding: 28px;
+    }
+
+    .floating {
+      background:
+        radial-gradient(circle at 15% 14%, rgba(255, 255, 255, 0.56), transparent 16%),
+        radial-gradient(circle at 80% 10%, rgba(239, 199, 208, 0.26), transparent 14%),
+        linear-gradient(180deg, #f8f0e8 0%, #f1e8dd 100%);
+    }
+
+    .floating .canvas::before,
+    .floating .canvas::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .floating .canvas::before {
+      right: 120px;
+      top: 100px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(229, 180, 193, 0.28), transparent 70%);
+    }
+
+    .floating .canvas::after {
+      left: 70px;
+      bottom: 80px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(167, 179, 152, 0.24), transparent 74%);
+    }
+
+    .poster-topline {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .tiny {
+      font-size: 0.8rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--soft-ink);
+    }
+
+    .poster-mark {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid rgba(30, 26, 24, 0.1);
+      background:
+        radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.7), transparent 30%),
+        linear-gradient(180deg, rgba(239, 199, 208, 0.42), rgba(201, 169, 108, 0.22));
+    }
+
+    .floating-core {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      padding-top: 28px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(3.4rem, 9vw, 7.8rem);
+      line-height: 0.9;
+      font-weight: 600;
+      max-width: 9ch;
+    }
+
+    .subtitle {
+      margin: 18px 0 0;
+      max-width: 34ch;
+      font-size: 1.12rem;
+      line-height: 1.7;
+      color: var(--soft-ink);
+    }
+
+    .portrait-stack {
+      position: relative;
+      margin-top: 36px;
+      width: min(360px, 72vw);
+    }
+
+    .portrait-stack::before {
+      content: "";
+      position: absolute;
+      inset: 22px -22px -22px 22px;
+      border-radius: 36px;
+      background: rgba(255, 255, 255, 0.38);
+      border: 1px solid rgba(30, 26, 24, 0.08);
+      transform: rotate(-5deg);
+    }
+
+    .portrait-stack img {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 34px;
+      box-shadow: 0 18px 34px rgba(52, 38, 30, 0.12);
+    }
+
+    .portrait-caption {
+      position: absolute;
+      right: -24px;
+      bottom: 22px;
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: rgba(255, 252, 248, 0.88);
+      border: 1px solid rgba(30, 26, 24, 0.08);
+      font-style: italic;
+      box-shadow: 0 12px 24px rgba(52, 38, 30, 0.08);
+    }
+
+    .orbit {
+      position: absolute;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(30, 26, 24, 0.12);
+      background: rgba(255, 251, 246, 0.76);
+      box-shadow: 0 10px 22px rgba(52, 38, 30, 0.08);
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .orbit:hover,
+    .paper-link:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .orbit-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.6;
+    }
+
+    .orbit.life {
+      left: 90px;
+      top: 250px;
+    }
+
+    .orbit.constitution {
+      right: 110px;
+      top: 220px;
+    }
+
+    .orbit.work {
+      left: 130px;
+      bottom: 180px;
+    }
+
+    .orbit.library {
+      right: 84px;
+      bottom: 160px;
+    }
+
+    .footer-whisper {
+      position: absolute;
+      left: 28px;
+      bottom: 24px;
+      font-size: 0.92rem;
+      color: var(--soft-ink);
+    }
+
+    .poster {
+      background:
+        linear-gradient(180deg, #faf4ed 0%, #f0e4d6 100%);
+    }
+
+    .poster .canvas {
+      overflow: hidden;
+    }
+
+    .poster .canvas::before {
+      content: "";
+      position: absolute;
+      inset: 30px;
+      border-radius: 34px;
+      border: 1px solid rgba(30, 26, 24, 0.08);
+      pointer-events: none;
+    }
+
+    .poster-layout {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 26px;
+      align-items: center;
+      min-height: 760px;
+    }
+
+    .poster-copy {
+      padding: 16px 10px 16px 24px;
+    }
+
+    .poster-copy .title {
+      max-width: 8ch;
+    }
+
+    .poster-copy .subtitle {
+      max-width: 30ch;
+    }
+
+    .paper-links {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+      max-width: 430px;
+    }
+
+    .paper-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(30, 26, 24, 0.1);
+      background: rgba(255, 251, 246, 0.72);
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .paper-link strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.08rem;
+    }
+
+    .paper-link span {
+      color: var(--soft-ink);
+      line-height: 1.55;
+    }
+
+    .paper-number {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(30, 26, 24, 0.12);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+    }
+
+    .poster-figure {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      padding: 42px 18px;
+    }
+
+    .oval {
+      width: min(420px, 100%);
+      aspect-ratio: 4 / 5;
+      border-radius: 48% 52% 47% 53% / 38% 40% 60% 62%;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.6), transparent 26%),
+        linear-gradient(180deg, rgba(239, 199, 208, 0.5), rgba(167, 179, 152, 0.28));
+      padding: 16px;
+      box-shadow: 0 24px 46px rgba(52, 38, 30, 0.1);
+    }
+
+    .oval img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 46% 54% 44% 56% / 34% 38% 62% 66%;
+    }
+
+    .figure-note {
+      position: absolute;
+      left: 10px;
+      top: 84px;
+      max-width: 180px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(30, 26, 24, 0.1);
+      background: rgba(255, 251, 246, 0.84);
+      font-size: 0.96rem;
+      line-height: 1.5;
+    }
+
+    .figure-note strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .summary-card {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(30, 26, 24, 0.1);
+      background: rgba(255, 251, 246, 0.7);
+    }
+
+    .summary-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+    }
+
+    .summary-card p {
+      margin: 0;
+      line-height: 1.6;
+      color: var(--soft-ink);
+    }
+
+    @media (max-width: 980px) {
+      .poster-layout,
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .orbit.life,
+      .orbit.constitution,
+      .orbit.work,
+      .orbit.library {
+        position: static;
+        margin-top: 14px;
+      }
+
+      .floating-core {
+        padding-bottom: 180px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 16px, 1240px);
+      }
+
+      .canvas {
+        min-height: auto;
+        padding: 20px;
+      }
+
+      .mockup {
+        border-radius: 28px;
+      }
+
+      .poster-layout {
+        gap: 12px;
+      }
+
+      .poster-copy {
+        padding: 4px 0 0;
+      }
+
+      .figure-note,
+      .portrait-caption {
+        position: static;
+        margin-top: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="intro">
+      <h1>Two new directions</h1>
+      <p>
+        These are built around the poster-like feeling you pointed to: one strong image,
+        very little text, and a few precise entrances into your world. The sections stay
+        the same, but the homepage behaves more like an art-directed composition than a normal site.
+      </p>
+      <span class="note">Reference direction: sparse, playful, controlled</span>
+    </section>
+
+    <section class="mockup floating">
+      <div class="mockup-header">
+        <div>
+          <h2>Mockup 1: Floating Objects</h2>
+          <p>The homepage is basically a poster with orbiting destinations.</p>
+        </div>
+        <span class="pill">More playful</span>
+      </div>
+      <div class="canvas">
+        <div class="poster-topline">
+          <span class="tiny">Laura Vandendorpe</span>
+          <div class="poster-mark"></div>
+        </div>
+
+        <a class="orbit life" href="#life">
+          <span class="orbit-dot"></span>
+          <span>Life Story</span>
+        </a>
+        <a class="orbit constitution" href="#constitution">
+          <span class="orbit-dot"></span>
+          <span>Constitution</span>
+        </a>
+        <a class="orbit work" href="#work">
+          <span class="orbit-dot"></span>
+          <span>Work</span>
+        </a>
+        <a class="orbit library" href="#library">
+          <span class="orbit-dot"></span>
+          <span>Library</span>
+        </a>
+
+        <div class="floating-core">
+          <h2 class="title">Laura Vandendorpe</h2>
+          <p class="subtitle">
+            a life composed of taste, work, memory,
+            private laws, and books that still glow
+          </p>
+
+          <div class="portrait-stack">
+            <img src="laura.jpeg" alt="Laura Vandendorpe" />
+            <div class="portrait-caption">Enter through whichever corner you like.</div>
+          </div>
+        </div>
+
+        <div class="footer-whisper">Fortuna audaces iuvat / XOXO</div>
+      </div>
+    </section>
+
+    <section class="mockup poster">
+      <div class="mockup-header">
+        <div>
+          <h2>Mockup 2: Portrait Poster</h2>
+          <p>More polished and fashion-editorial, with the sections treated like a clean index.</p>
+        </div>
+        <span class="pill">More elegant</span>
+      </div>
+      <div class="canvas">
+        <div class="poster-layout">
+          <div class="poster-copy">
+            <span class="tiny">Laura Vandendorpe</span>
+            <h2 class="title">A private index of selves.</h2>
+            <p class="subtitle">
+              Four doors into the same person: the story, the rules, the ambition,
+              and the shelf of books that rearranged the room.
+            </p>
+
+            <div class="paper-links">
+              <a class="paper-link" href="#life">
+                <div>
+                  <strong>Life Story</strong>
+                  <span>eras, turning points, favorite detours</span>
+                </div>
+                <span class="paper-number">01</span>
+              </a>
+              <a class="paper-link" href="#constitution">
+                <div>
+                  <strong>Constitution</strong>
+                  <span>principles, contradictions, standards, wants</span>
+                </div>
+                <span class="paper-number">02</span>
+              </a>
+              <a class="paper-link" href="#work">
+                <div>
+                  <strong>Work</strong>
+                  <span>what I build, what I value, where I’m headed</span>
+                </div>
+                <span class="paper-number">03</span>
+              </a>
+              <a class="paper-link" href="#library">
+                <div>
+                  <strong>Library</strong>
+                  <span>books read, loved, kept, and returned to</span>
+                </div>
+                <span class="paper-number">04</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="poster-figure">
+            <div class="figure-note">
+              <strong>Design note</strong>
+              Big image. Minimal words. The rest feels like labels pinned around a central presence.
+            </div>
+            <div class="oval">
+              <img src="laura.jpeg" alt="Laura Vandendorpe portrait" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary">
+      <div class="summary-card">
+        <strong>Closest to the reference</strong>
+        <p>
+          Floating Objects. It has more of that “poster with interactive bits” energy.
+        </p>
+      </div>
+      <div class="summary-card">
+        <strong>Most likely to age well</strong>
+        <p>
+          Portrait Poster. It still feels distinctive, but it is cleaner and easier to refine.
+        </p>
+      </div>
+      <div class="summary-card">
+        <strong>Best next move</strong>
+        <p>
+          Pick the composition you like more, then I’ll turn it into the real homepage and tune the typography, colors, and chapter names.
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
