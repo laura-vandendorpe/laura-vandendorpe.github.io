@@ -181,6 +181,7 @@
 
     .story-body p {
       margin: 0 0 18px;
+      white-space: pre-line;
     }
 
     .story-body p:last-child {
@@ -209,6 +210,10 @@
 
     .story-trigger[data-story-id="ignorance"] img {
       object-position: center 62%;
+    }
+
+    .story-trigger[data-story-id="joy"] img {
+      object-position: center 34%;
     }
 
     .polaroid:nth-child(5n + 4) img {
@@ -286,13 +291,22 @@
     <p class="tagline">Small stories behind the bigger things that matter to me.</p>
     <section class="polaroids" aria-label="Polaroid photos">
       <figure class="polaroid story-trigger" tabindex="0" data-story-id="courage"><img src="courage.jpeg" alt="Palm trees under a bright Los Angeles sky" /><figcaption class="marker-title"><svg class="marker-title-svg" viewBox="0 0 92 24" aria-label="Courage" role="img"><text x="46" y="12" text-anchor="middle" textLength="92" lengthAdjust="spacingAndGlyphs">Courage</text></svg></figcaption></figure>
-      <figure class="polaroid story-trigger" tabindex="0" data-story-id="generosity"><img src="generosity.jpeg" alt="Mattress in an empty room" /><figcaption class="marker-title"><svg class="marker-title-svg" viewBox="0 0 92 24" aria-label="Generosity" role="img"><text x="46" y="12" text-anchor="middle" textLength="92" lengthAdjust="spacingAndGlyphs">Generosity</text></svg></figcaption></figure>
       <figure class="polaroid story-trigger" tabindex="0" data-story-id="ignorance">
         <img src="ignorance-is-bliss.jpeg" alt="Ocean view from a hotel balcony with a pool and a small island offshore" />
         <figcaption class="marker-title">
           <svg class="marker-title-svg" viewBox="0 0 92 24" aria-label="Ignorance is Bliss" role="img">
             <text x="46" y="5" text-anchor="middle" textLength="84" lengthAdjust="spacingAndGlyphs">Ignorance</text>
             <text x="46" y="21" text-anchor="middle" textLength="78" lengthAdjust="spacingAndGlyphs">is Bliss</text>
+          </svg>
+        </figcaption>
+      </figure>
+      <figure class="polaroid story-trigger" tabindex="0" data-story-id="generosity"><img src="generosity.jpeg" alt="Mattress in an empty room" /><figcaption class="marker-title"><svg class="marker-title-svg" viewBox="0 0 92 24" aria-label="Generosity" role="img"><text x="46" y="12" text-anchor="middle" textLength="92" lengthAdjust="spacingAndGlyphs">Generosity</text></svg></figcaption></figure>
+      <figure class="polaroid story-trigger" tabindex="0" data-story-id="joy">
+        <img src="joy-comes-in-the-morning.jpg" alt="American flag waving against a blue sky with mountains and pine trees behind it" />
+        <figcaption class="marker-title">
+          <svg class="marker-title-svg" viewBox="0 0 92 24" aria-label="Joy comes in the morning" role="img">
+            <text x="46" y="5" text-anchor="middle" textLength="84" lengthAdjust="spacingAndGlyphs">Joy comes in</text>
+            <text x="46" y="21" text-anchor="middle" textLength="86" lengthAdjust="spacingAndGlyphs">the morning</text>
           </svg>
         </figcaption>
       </figure>
@@ -336,7 +350,7 @@
           "When I came to America at 25, with $20K in my bank account, I knew that wasn't a lot in this new world. Money felt scarce. I had never let money, or my lack thereof, stop me from chasing my dreams, but this time it felt like a stretch.",
           "My first purchase was a motel. At $200 a night, it felt like a splurge until I saw the very humble furnishings and realized I could barely cram my equally humble belongings, two suitcases with some clothes and pictures, into the tiny bedroom. But hey, I had arrived.",
           "It took me two weeks, aka 20% of my net worth, and tens of rejections to get out of that motel and into an apartment. I needed someone to accept my non-existent credit score and believe that yes, I was employed, and no, I did not have a father or a husband as a guarantor.",
-          "Just like that $20K had become $10K after I paid a higher security deposit to convince the landlord that I'd be good for the lease. First order of business: buying a mattress. Everything else could wait until after my first paycheck.",
+          "Just like that, $20K had become $10K after I paid a higher security deposit to convince the landlord that I'd be good for the lease. First order of business: buying a mattress. Everything else could wait until after my first paycheck.",
           "Jared the mattress seller, bless his heart, was an absolute legend. He convinced me it was OK not to compromise on my back pain, but also understood my financial predicament. He offered me his best showroom model at a steep discount because of a few fabrication faults and, really, because he felt bad for me. I had a roof over my head and a mattress under my body. The dream.",
           "My next step was to make the most of the month I had before starting work. My belongings, still just two suitcases and now a mattress, were safe and sound in my apartment, and I figured it would be cheaper to cross the border than survive another month in LA without a salary.",
           "So I took the cheapest flight to Puerto Escondido, surfer's paradise, booked a hostel for $20 a night, and signed up for some surf lessons. Well within my now remaining $8K budget. After getting food poisoning on day one, I had to temporarily splurge on a $30 a night private room to spare my roommates, which I made up for by rationing my post-surf cocos on the beach. What a life.",
@@ -383,6 +397,25 @@
           "They said, \"Well, Mazatlan is completely under cartel rule. We would never step foot there.\" It turned out the reason my driver kept driving after hitting another car was that if you get out, you get shot.",
           "I still do not know which guardian angel to thank for that one, but one thing is for sure. It was a blessing not to know.",
           "I still have not checked whether Mazatlan sits on the Pacific or the Atlantic, and at this point I am even more convinced that ignorance is bliss."
+        ]
+      },
+      joy: {
+        title: "Joy comes in the morning",
+        paragraphs: [
+          "It’s March 2026. I just turned 30. Never thought that day would come - but time has no mercy on any of us.",
+          "I’m in a new studio apartment I just rented. Tiny. Less than 400 square feet. Back down to almost no belongings. Four years into my LA life, I had gone full circle: from arriving with two suitcases, to accumulating furniture and a whole life, back down to (almost) zero.",
+          "Scott and I had just broken up, long story for another time. I left my furniture at his house, since by then it had all become ours anyway, packed my clothes into my car and drove off into this tiny furnished studio.",
+          "Thirty years old. Single. Working a job that was slowly killing my soul, and my body — those 80 hour weeks are starting to weigh. My visa depends on it, so no way out of that.\nNo real home. No real belongings. Not even a teacup or a plate I could call my own.",
+          "Things with my family are broken too. Promised myself I wouldn’t get into it, but before you think I am an awful human being, the fracture with my family originated in them not accepting my relationship with Scott. Now I lost both.",
+          "Heartbroken, isolated, with no one in my corner. Just family and friends pitying me, blaming me, or quietly thinking my choices had brought me exactly where I deserved to be.",
+          "All the devil’s voices are whispering in my ear. That I should never have come here. That my family was right. That I am now truly “past my expiration date” (thanks grandma & society for that language). That there is no other path for me than to crawl back to Europe, tail between my legs, pack away every dream I ever had and spend the rest of my life haunted by the future that could have been.",
+          "I feel like I am coming undone. I’ve met depression before, I am very familiar with bathroom floor crying, but this time feels different. Bleaker. Like something in me was starting to go out.",
+          "And then I did the only sane thing left to do.\nI went to bed.\nSleep comes eventually. After the spiraling and the tears and the crawling, it comes.",
+          "And then morning comes too.",
+          "Ah, the morning. What a glorious gift. Light through the blinds. Another God-given day.\nAnd in my mailbox that morning, my path into a new life.",
+          "The green card.",
+          "I didn’t tell anyone. Partly because they would not have understood. Partly because they would not have been happy for me. But mostly because it felt like something sacred. A private little wink from God. My joy. Mine to hold.",
+          "God has a sense of humor. And always, He will bring joy in the morning."
         ]
       }
     };
